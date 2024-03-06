@@ -40,7 +40,8 @@ def calcular_media_por_posicao(data):
         medias_posicao = []
         for jogador in range(17):
             notas_jogador = data.iloc[:, jogador * 5 + posicao]
-            media_jogador = notas_jogador[notas_jogador != 0].mean()
+            notas_jogador_sem_zeros = notas_jogador.replace(0, pd.NA)  # Substituir os zeros por NaN
+            media_jogador = notas_jogador_sem_zeros.mean()
             medias_posicao.append(media_jogador)
         medias[nome_posicao] = medias_posicao
     return medias
